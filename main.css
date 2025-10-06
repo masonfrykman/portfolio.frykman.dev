@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+  font-family: 'Work Sans', 'Helvetica', 'Futura', 'Arial', sans-serif;
+  display: flex;
+  font-size: 16pt;
+  align-items: center;
+  justify-content: center;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 32pt;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#ry-ligature {
+  letter-spacing: -2pt;
+}
+
+.sidebar-list {
+  margin-top: 18pt;
+  list-style: none;
+  padding: 0;
+}
+
+.show-clickable {
+  cursor: pointer;
+}
+
+#root {
+  display: flex;
+}
+
+@media (width >= 920px) {
+  #root {
+    margin-top: 100px;
+    max-width: 900px;
+    min-width: 900px;
+    flex-direction: row;
+  }
+
+  #content-hook {
+    margin-left: 70pt;
+  }
+
+  .sidebar-list {
+    flex-direction: row;
+  }
+}
+
+@media (width < 920px) {
+    #root {
+        flex-direction: column;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: whitesmoke;
+        color: black;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: rgb(20, 20, 20);
+        color: white;
+    }
+}
