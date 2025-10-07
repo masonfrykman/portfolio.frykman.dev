@@ -4,8 +4,6 @@ body {
   font-family: 'Work Sans', 'Helvetica', 'Futura', 'Arial', sans-serif;
   display: flex;
   font-size: 16pt;
-  align-items: center;
-  justify-content: center;
 }
 
 .name {
@@ -29,15 +27,28 @@ body {
   cursor: pointer;
 }
 
+.show-clickable:disabled {
+  cursor: none;
+}
+
 #root {
   display: flex;
 }
 
-@media (width >= 920px) {
+@keyframes fadein {
+  0% { opacity: 0; }
+  100% { opacity: 100%; }
+}
+
+.appear-anim {
+  animation: 200ms ease-in 0ms fadein;
+}
+
+@media (width >= 720px) {
   #root {
-    margin-top: 100px;
-    max-width: 900px;
-    min-width: 900px;
+    margin-top: 85pt;
+    max-width: 720px;
+    min-width: 720px;
     flex-direction: row;
   }
 
@@ -48,11 +59,29 @@ body {
   .sidebar-list {
     flex-direction: row;
   }
+
+  body {
+    align-items: center;
+    justify-content: center;
+  }
 }
 
-@media (width < 920px) {
+/* at this width, optimise for touch */
+@media (width < 720px) {
+    body {
+      justify-content: left;
+    }
+
     #root {
+        margin-top: 60pt;
+        margin-right: 8pt;
+        margin-left: 8pt;
         flex-direction: column;
+        justify-content: left;
+    }
+    
+    .sidebar-list li {
+      margin-top: 4pt;
     }
 }
 
