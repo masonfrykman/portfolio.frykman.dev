@@ -44,7 +44,7 @@ body {
   animation: 200ms ease-in 0ms fadein;
 }
 
-@media (width >= 720px) {
+@media (width >= 750px) {
   #root {
     margin-top: 85pt;
     max-width: 720px;
@@ -67,7 +67,7 @@ body {
 }
 
 /* at this width, optimise for touch */
-@media (width < 720px) {
+@media (width < 750px) {
     body {
       justify-content: left;
     }
@@ -97,4 +97,41 @@ body {
         background-color: rgb(20, 20, 20);
         color: white;
     }
+}
+
+/* Projects grid layout */
+#proj-grid-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.proj-item {
+  border-radius: 6pt;
+  border-width: 1pt;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10pt;
+  padding: 5pt;
+}
+
+@media (prefers-color-scheme: light) {
+  .proj-item {
+    border-color: black;
+    border-style: solid;
+  }
+}
+
+.proj-item .desc {
+  max-lines: 3;
+  word-wrap: normal;
+  margin: 0;
+  margin-top: 12pt;
+} 
+
+.proj-item * {
+  font-size: 12pt;
+}
+
+.note {
+  font-size: 12pt;
 }

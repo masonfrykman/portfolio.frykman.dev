@@ -1,4 +1,5 @@
 import { ict_handle_contact, ict_handle_about, ict_handle_notfound } from "./content_handlers.js";
+import { ict_handle_projects } from "./project_loader.js";
 
 var presenting;
 
@@ -11,6 +12,9 @@ function putContent(forPage) {
             break;
         case 'about':
             ict_handle_about();
+            break;
+        case 'projects':
+            ict_handle_projects();
             break;
         default:
             ict_handle_notfound();

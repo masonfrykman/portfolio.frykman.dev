@@ -1,0 +1,44 @@
+[
+    {
+        "name": "(this)",
+        "date": "October 2025",
+        "blurb": "the website you're looking at right now.",
+        "href": ""
+    },
+    {
+        "name": "package:rbws",
+        "date": "July 2024 - March 2025",
+        "blurb": "the web server serving this to you right now.",
+        "href": "https://pub.dev/packages/rbws"
+    },
+    {
+        "name": "minepicker (frontend)",
+        "date": "July 2022 - February 2023",
+        "blurb": "A full-stack application that manages Minecraft servers over a LAN.",
+        "href": "https://github.com/masonfrykman/minepicker"
+    },
+    {
+        "name": "minepicker (backend)",
+        "date": "before July 2022 - February 2023",
+        "blurb": "The backend server that manages Minecraft servers over a LAN using a REST API w/ package:shelf",
+        "href": "https://github.com/masonfrykman/minepicker-backend"
+    },
+    {
+        "name": "NoPerish (macOS)",
+        "date": "May 2022 - June 2022",
+        "blurb": "An AppKit app that pings NationStates every time the user logs in.",
+        "href": "https://github.com/ikeacat/NoPerish-macOS"
+    },
+    {
+        "name": "NoPerish (Flutter)",
+        "date": "June 2021 - April 2022",
+        "blurb": "A desktop app that pings NationStates every time the computer starts up.",
+        "href": "https://github.com/masonfrykman/NoPerish"
+    },
+    {
+        "name": "home-programs",
+        "date": "December 2020 - April 2021",
+        "blurb": "A collection of Python scripts that manages the FTP backup of my house's camera system.",
+        "href": "https://github.com/masonfrykman/home-programs"
+    }
+]
