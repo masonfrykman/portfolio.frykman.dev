@@ -26,4 +26,5 @@ void main(List<String> args) {
   };
 
   instance.start();
+  print("HTTP server running at ${instance.host} on port ${instance.port}");
 }

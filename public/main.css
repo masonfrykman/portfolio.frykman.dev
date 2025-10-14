@@ -31,6 +31,16 @@ body {
   cursor: none;
 }
 
+.fades:hover {
+  opacity: 50%;
+  animation: fadeout 100ms ease-in-out 0s 1 both;
+}
+
+@keyframes fadeout {
+  0% { opacity: 100%; }
+  100% { opacity: 50%; }
+}
+
 #root {
   display: flex;
 }
