@@ -31,6 +31,30 @@ void main(List<String> args) {
   };
 
   insecureInstance.start();
+  print(
+    "Brought up insecure instance at ${insecureInstance.host} @ port ${insecureInstance.port}",
+  );
 
-  // Try to bring up insecure instance
+  // Try to bring up secure instance
+  if (Platform.environment["CERT_PRIV_KEY"] != null &&
+      Platform.environment["CERT_PATH"] != null) {
+    final securityContext = SecurityContext(withTrustedRoots: true);
+    securityContext.useCertificateChain(Platform.environment["CERT_PATH"]!);
+    securityContext.usePrivateKey(Platform.environment["CERT_PRIV_KEY"]!);
+
+    final secureInstance = HTTPServerInstance(
+      InternetAddress.anyIPv4,
+      443,
+      generalServeRoot: "public/",
+      securityContext: securityContext,
+    );
+
+    secureInstance.routeNotFound = insecureInstance.routeNotFound;
+
+    secureInstance.start();
+
+    print(
+      "Brought up secure instance at ${secureInstance.host} @ port ${secureInstance.port}",
+    );
+  }
 }
