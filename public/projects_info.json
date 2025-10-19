@@ -2,13 +2,13 @@
     {
         "name": "(this)",
         "date": "October 2025",
-        "blurb": "the website you're looking at right now.",
+        "blurb": "portfolio.frykman.dev, or, the website you are on right now. My personal portfolio website.",
         "href": ""
     },
     {
         "name": "package:rbws",
         "date": "July 2024 - March 2025",
-        "blurb": "the web server serving this to you right now.",
+        "blurb": "A Dart package that allows for programmatically creating an HTTP server. (This served this website to you).",
         "href": "https://pub.dev/packages/rbws"
     },
     {
