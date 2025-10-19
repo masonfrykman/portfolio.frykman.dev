@@ -1,30 +1,36 @@
+import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:rbws/rbws.dart';
 
 void main(List<String> args) {
-  HTTPServerInstance instance = HTTPServerInstance(
+  // Load index
+  var index = File("public/index.html");
+  if (!index.existsSync()) {
+    stderr.writeln("Failed to find public/index.html, does not exist.");
+    exit(256);
+  }
+
+  final mainPageContent = index.readAsStringSync();
+
+  // Bring up insecure instance.
+  final insecureInstance = HTTPServerInstance(
     InternetAddress.anyIPv4,
-    8080,
-    generalServeRoot: "public",
-    defaultStorageLength: Duration(seconds: 0),
+    80,
+    generalServeRoot: "public/",
   );
 
-  instance.onResponse = (res) {
-    print(
-      "[${DateTime.now()}] ${RBWSResponse.statusToString(res.status)} ${res.toRequest?.path}",
-    );
-  };
-
-  instance.routeNotFound = (req) async {
-    return RBWSResponse(
+  insecureInstance.routeNotFound = (r) {
+    return RBWSResponse.dataFromString(
       200,
-      data: File("public/index.html").readAsBytesSync(),
+      mainPageContent,
+      toRequest: r,
       headers: {"Content-Type": "text/html"},
-      toRequest: req,
     );
   };
 
-  instance.start();
-  print("HTTP server running at ${instance.host} on port ${instance.port}");
+  insecureInstance.start();
+
+  // Try to bring up insecure instance
 }
