@@ -33,7 +33,7 @@ async function populateProjects() {
 
     var root = document.createElement("div");
     root.classList.add("appear-anim");
-    root.innerHTML = "<h1>" + projects.length + " projects</h1><i class='note'>Note: I'm working on individual pages for each of these! In lieu of pages, they'll link to their respective repositories&mdash;given they exist.</i>";
+    root.innerHTML = "<h1>" + projects.length + " projects</h1>";
 
     root.appendChild(projGridLayout);
 
