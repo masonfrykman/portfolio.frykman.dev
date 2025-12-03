@@ -2,3 +2,7 @@
 # Created by `dart pub`
 .dart_tool/
 .DS_Store
+
+dist/*
+!dist/.gitkeep
+build.tar.gz
