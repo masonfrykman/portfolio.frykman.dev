@@ -2,7 +2,6 @@ import { showError } from "./error.js";
 import { Project } from "./project.js";
 
 async function downloadProjectInfo() {
-    console.log('x');
     let url = "/projects_info.json";
     var req = await fetch(url);
     if(!req.ok) {

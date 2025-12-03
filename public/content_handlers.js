@@ -10,9 +10,6 @@ function grab(name, onloadCallback) {
     let req = new XMLHttpRequest();
 
     req.onloadend = (ev) => {
-        console.log(ev);
-        console.log(req.status);
-
         document.getElementById("content-hook").innerHTML = req.responseText;
         if(onloadCallback != null) {
             onloadCallback();
