@@ -5,9 +5,9 @@ import 'package:rbws/rbws.dart';
 void main(List<String> args) {
   try {
     // Load index
-    var index = File("public/index.html");
+    var index = File("dist/index.html");
     if (!index.existsSync()) {
-      stderr.writeln("Failed to find public/index.html, does not exist.");
+      stderr.writeln("Failed to find dist/index.html, does not exist.");
       exit(256);
     }
 
@@ -17,7 +17,7 @@ void main(List<String> args) {
     final insecureInstance = HTTPServerInstance(
       InternetAddress.anyIPv4,
       80,
-      generalServeRoot: "public/",
+      generalServeRoot: "dist/",
     );
 
     insecureInstance.routeNotFound = (r) {
@@ -44,7 +44,7 @@ void main(List<String> args) {
       final secureInstance = HTTPServerInstance(
         InternetAddress.anyIPv4,
         443,
-        generalServeRoot: "public/",
+        generalServeRoot: "dist/",
         securityContext: securityContext,
       );
 
