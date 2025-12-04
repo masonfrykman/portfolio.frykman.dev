@@ -1,6 +1,7 @@
 import { showError } from "./error.js";
 
-function grab(name, onloadCallback) {
+// TODO: split this function into different functions to show it on the page and do the callback.
+function grab(name: string, onloadCallback: Function | null) {
     if(window.document.getElementById("content-hook") == null) {
         showError("Failed to display content, missing hook.")
         return
@@ -10,7 +11,11 @@ function grab(name, onloadCallback) {
     let req = new XMLHttpRequest();
 
     req.onloadend = (ev) => {
-        document.getElementById("content-hook").innerHTML = req.responseText;
+        if(document.getElementById("content-hook") != null) {
+            document.getElementById("content-hook")!.innerHTML = req.responseText;
+        } else {
+            // TODO: show an error
+        }
         if(onloadCallback != null) {
             onloadCallback();
         }
@@ -21,17 +26,17 @@ function grab(name, onloadCallback) {
 }
 
 export function ict_handle_contact() {
-    grab('contact');
+    grab('contact', null);
 }
 
 export function ict_handle_about() {
-    grab('about');
+    grab('about', null);
 }
 
 export function ict_handle_notfound() {
     grab('nf', function() {
         if(document.getElementById("pnf") != null) {
-            document.getElementById("pnf").innerText = document.location.pathname;
+            document.getElementById("pnf")!.innerText = document.location.pathname;
         }
     });
 }

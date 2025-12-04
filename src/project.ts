@@ -1,58 +1,52 @@
 export class Project {
-    name;
-    date;
-    blurb;
-    href;
+    private name: string; // required
+    private date: string | null;
+    private blurb: string | null;
+    private href: string | null;
 
-    constructor(name, date, blurb, href) {
+    public constructor(name: string, date: string | null, blurb: string | null, href: string | null) {
         this.name = name;
         this.date = date;
         this.blurb = blurb;
         this.href = href;
     }
 
-    static fromJSON(jsonDict) {
-        if(jsonDict == null || !(typeof jsonDict["name"] === "string")) {
-            return null;
+    public static fromJSON(jsonDict: Map<string, string>): Project {
+        if(!jsonDict.has("name")) {
+            // TODO: error!
         }
 
-        // type check each dict entry
-        if(!(typeof jsonDict["name"] === "string")
-            || !(typeof jsonDict["date"] === "string")
-            || !(typeof jsonDict["blurb"] === "string")
-            || !(typeof jsonDict["href"] === "string")) {
-                return null
-            }
-
-        return new Project(jsonDict["name"], jsonDict["date"], jsonDict["blurb"], jsonDict["href"])
+        return new Project(jsonDict.get("name")!, jsonDict.get("date") ?? null, jsonDict.get("blurb") ?? null, jsonDict.get("href") ?? null);
     }
 
-    makeInfoTile() {
-        // Create individual items.
-        var nameElem = document.createElement("span");
-        nameElem.innerText = this.name;
-        nameElem.classList.add("name");
-
-        var desc = document.createElement("p");
-        desc.innerText = this.blurb;
-        desc.classList.add("desc");
-        
-        var dateElem = document.createElement("span");
-        dateElem.innerText = this.date;
-        dateElem.classList.add("date");
-
+    public makeInfoTile(): HTMLDivElement {
         // Make the root box
         var rootBox = document.createElement("div");
         rootBox.classList.add("proj-item");
 
-        // Put the elements in
+        // Create individual items.
+        var nameElem = document.createElement("span");
+        nameElem.innerText = this.name;
+        nameElem.classList.add("name");
         rootBox.appendChild(nameElem);
-        rootBox.appendChild(dateElem);
-        rootBox.appendChild(desc);
-
-        if(this.href != "") {
+        
+        var desc = document.createElement("p");
+        if(this.blurb != null) {
+            desc.innerText = this.blurb;
+            desc.classList.add("desc");
+            rootBox.appendChild(desc);
+        }
+        
+        var dateElem = document.createElement("span");
+        if(this.date != null) {
+            dateElem.innerText = this.date;
+            dateElem.classList.add("date");
+            rootBox.appendChild(dateElem);
+        }
+        
+        if(this.href != null && this.href != "") {
             rootBox.addEventListener("click", (ev) => {
-                window.location = this.href;
+                window.location.href = this.href!;
             })
             rootBox.classList.add("show-clickable");
         }

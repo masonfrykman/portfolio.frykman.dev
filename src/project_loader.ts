@@ -36,8 +36,12 @@ async function populateProjects() {
 
     root.appendChild(projGridLayout);
 
-    document.getElementById("content-hook").innerHTML = "";
-    document.getElementById("content-hook").appendChild(root);
+    if(document.getElementById("content-hook") != null) {
+        document.getElementById("content-hook")!.innerHTML = "";
+        document.getElementById("content-hook")!.appendChild(root);
+    } else {
+        // TODO: show an error
+    }
 }
 
 export function ict_handle_projects() {
