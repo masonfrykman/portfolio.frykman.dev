@@ -1,12 +1,25 @@
 #!/bin/bash
 
-# Minify JS
-rollup src/index.js --file .intermediate.js --format es
-minify .intermediate.js > dist/bundle.min.js
-rm .intermediate.js
+echo "Clearing build directory"
+rm build/*
 
-# Copy over assets
+# TS -> JS in dist/
+echo ""
+echo "Compiling Typescript to Javascript"
+echo "  > tsc"
+tsc
 
+echo ""
+echo "Bundling & minifying Javascript"
+# Bundle & minify JS
+echo "  > rollup"
+rollup build/index.js --file build/bundle.js --format es
+echo "  > minify"
+minify build/bundle.js > dist/bundle.min.js
+
+# Copy over assets from src/ -> dist/
+echo ""
+echo "Copying assets"
 cd src
 # HTML
 for filename in *.html; do
@@ -19,11 +32,12 @@ for filename in *.css; do
 done
 cd ..
 
-# individual files
 cp src/projects_info.json dist/projects_info.json
 cp src/sitemap.xml dist/sitemap.xml
 
+echo ""
+echo "Bundling js + assets"
 # Package for quick upload
 tar -cz dist/ > build.tar.gz
 
-echo "Done"
+echo "Done!"
