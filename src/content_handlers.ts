@@ -1,4 +1,4 @@
-import { showError } from "./error.js";
+import { showError } from "./error";
 
 // TODO: split this function into different functions to show it on the page and do the callback.
 function grab(name: string, onloadCallback: Function | null) {

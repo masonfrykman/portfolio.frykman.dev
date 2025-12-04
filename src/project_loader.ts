@@ -1,5 +1,5 @@
-import { showError } from "./error.js";
-import { Project } from "./project.js";
+import { showError } from "./error";
+import { Project } from "./project";
 
 async function downloadProjectInfo() {
     let url = "/projects_info.json";
