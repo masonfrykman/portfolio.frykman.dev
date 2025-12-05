@@ -1,11 +1,18 @@
-import { showError } from "./error";
+import { catastrophicError, nonfatalError } from "./error";
 import { Project } from "./project";
 
 async function downloadProjectInfo() {
-    let url = "/projects_info.json";
-    var req = await fetch(url);
+    var req;
+    try {
+        req = await fetch("/projects_info.json");
+    } catch(e) {
+        throw e; // Rethrow and prevent parsing it.
+    }
+
+    if(req == null) return;
+
     if(!req.ok) {
-        showError("Failed to load project info");
+        nonfatalError("Couldn't load the project data from the server. (2)");
         return;
     }
 
@@ -13,7 +20,13 @@ async function downloadProjectInfo() {
 }
 
 async function populateProjects() {
-    var json = await downloadProjectInfo();
+    var json;
+    try {
+        json = await downloadProjectInfo();
+    } catch(e) {
+        nonfatalError("Couldn't load the project data from the server. (1)");
+        return;
+    }
 
     var projects = [];
     for(const dictionary of json) {
@@ -40,7 +53,8 @@ async function populateProjects() {
         document.getElementById("content-hook")!.innerHTML = "";
         document.getElementById("content-hook")!.appendChild(root);
     } else {
-        // TODO: show an error
+        catastrophicError("Failed to display the project content at the content hook, content hook doesn't exist.");
+        return;
     }
 }
 
