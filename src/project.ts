@@ -11,10 +11,8 @@ export class Project {
         this.href = href;
     }
 
-    public static fromJSON(jsonDict: any): Project {
-        if(jsonDict.name == undefined) {
-            // TODO: error!
-        }
+    public static fromJSON(jsonDict: any): Project | null {
+        if(jsonDict.name == undefined) return null;
 
         return new Project(jsonDict.name!, jsonDict.date ?? null, jsonDict.blurb ?? null, jsonDict.href ?? null);
     }
