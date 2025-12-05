@@ -40,7 +40,8 @@ async function populateProjects() {
         document.getElementById("content-hook")!.innerHTML = "";
         document.getElementById("content-hook")!.appendChild(root);
     } else {
-        // TODO: show an error
+        showError("Failed to display the project content at the content hook, content hook doesn't exist.");
+        return;
     }
 }
 
