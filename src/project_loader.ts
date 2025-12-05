@@ -6,8 +6,7 @@ async function downloadProjectInfo() {
     try {
         req = await fetch("/projects_info.json");
     } catch(e) {
-        nonfatalError("Couldn't load the project data from the server. (1)");
-        return;
+        throw e; // Rethrow and prevent parsing it.
     }
 
     if(req == null) return;
@@ -21,7 +20,13 @@ async function downloadProjectInfo() {
 }
 
 async function populateProjects() {
-    var json = await downloadProjectInfo();
+    var json;
+    try {
+        json = await downloadProjectInfo();
+    } catch(e) {
+        nonfatalError("Couldn't load the project data from the server. (1)");
+        return;
+    }
 
     var projects = [];
     for(const dictionary of json) {
