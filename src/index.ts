@@ -34,8 +34,6 @@ function spawnPageContent(name: string) {
 }
 
 addEventListener("popstate", (stateevent) => {
-    console.log(stateevent);
-
     putContent(stateevent.state);
 });
 
