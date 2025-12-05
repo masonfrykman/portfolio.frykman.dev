@@ -1,9 +1,9 @@
-import { showError } from "./error";
+import { catastrophicError } from "./error";
 
 // TODO: split this function into different functions to show it on the page and do the callback.
 function grab(name: string, onloadCallback: Function | null) {
     if(window.document.getElementById("content-hook") == null) {
-        showError("Failed to display content, missing hook.")
+        catastrophicError("Failed to display content, missing hook.")
         return
     }
 

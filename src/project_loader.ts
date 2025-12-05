@@ -1,11 +1,11 @@
-import { showError } from "./error";
+import { catastrophicError } from "./error";
 import { Project } from "./project";
 
 async function downloadProjectInfo() {
     let url = "/projects_info.json";
     var req = await fetch(url);
     if(!req.ok) {
-        showError("Failed to load project info");
+        catastrophicError("Failed to load project info");
         return;
     }
 
@@ -40,7 +40,7 @@ async function populateProjects() {
         document.getElementById("content-hook")!.innerHTML = "";
         document.getElementById("content-hook")!.appendChild(root);
     } else {
-        showError("Failed to display the project content at the content hook, content hook doesn't exist.");
+        catastrophicError("Failed to display the project content at the content hook, content hook doesn't exist.");
         return;
     }
 }
