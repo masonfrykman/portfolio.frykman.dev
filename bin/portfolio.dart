@@ -25,7 +25,11 @@ void main(List<String> args) {
         200,
         mainPageContent,
         toRequest: r,
-        headers: {"Content-Type": "text/html"},
+        headers: {
+          "Content-Type": "text/html",
+          "Cache-Control": "public,max-age=259200", // Allow for 3 days
+          "Age": "0",
+        },
       );
     };
 
