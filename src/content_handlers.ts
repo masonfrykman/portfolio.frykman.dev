@@ -40,3 +40,14 @@ export function ict_handle_notfound() {
         }
     });
 }
+
+export function ict_handle_nonFatalError(errDesc: string) {
+    let hook = document.getElementById("content-hook");
+    if(hook == null) {
+        catastrophicError("<i>We tried to display a non-fatal error, but in displaying that error, we encountered a fatal error! (content hook is missing)</i><p>Original non-fatal error:</p><p>" + errDesc + "</p>");
+        return;
+    }
+
+    hook.innerHTML = `<h1>oops!</h1>
+    <p>` + errDesc + `</p>`;
+}

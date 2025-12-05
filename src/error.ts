@@ -1,3 +1,5 @@
+import { putError } from "./content_manager";
+
 // Wipes the page and displays a really big FATAL ERROR with the error description.
 export function catastrophicError(errDesc: string) {
     console.error(errDesc)
@@ -12,10 +14,10 @@ export function catastrophicError(errDesc: string) {
     }
 }
 
+// Displays an error in the content hook. If it's missing, then it (ict_handle_nonFatalError) will kick the error to catastrophicError().
+// This is used when an error occured that shouldn't fully ruin the flow of the site.
 export function nonfatalError(errDesc: string | undefined) {
     console.warn(errDesc);
 
-    // Show an error on the content hook
-    // If the content-hook is undefined, then pass the error to catastrophicError()
-    // TODO: implement further
+    putError(errDesc ?? "An error occured.");
 }

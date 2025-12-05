@@ -1,4 +1,4 @@
-import { ict_handle_contact, ict_handle_about, ict_handle_notfound } from "./content_handlers";
+import { ict_handle_contact, ict_handle_about, ict_handle_notfound, ict_handle_nonFatalError } from "./content_handlers";
 import { ict_handle_projects } from "./project_loader";
 
 var presenting: string;
@@ -22,6 +22,11 @@ export function putContent(forPage: string) {
     }
 
     presenting = forPage;
+}
+
+export function putError(errDesc: string) {
+    presenting = 'error';
+    ict_handle_nonFatalError(errDesc);
 }
 
 export function spawnPageContent(name: string) {
