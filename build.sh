@@ -1,9 +1,10 @@
 #!/bin/bash
 
-echo "Clearing build directory"
-rm build/*
+echo "Clearing build & dist directories"
+rm -rf build/
+rm -rf dist/
 
-# TS -> JS in dist/
+# TS -> JS in build/
 echo ""
 echo "Compiling Typescript to Javascript"
 echo "  > tsc"
@@ -14,7 +15,9 @@ echo "Bundling & minifying Javascript"
 # Bundle & minify JS
 echo "  > rollup"
 rollup build/index.js --file build/bundle.js --format es
+
 echo "  > minify"
+mkdir dist
 minify build/bundle.js > dist/bundle.min.js
 
 # Copy over assets from src/ -> dist/
@@ -40,4 +43,5 @@ echo "Bundling js + assets"
 # Package for quick upload
 tar -cz dist/ > build.tar.gz
 
+echo ""
 echo "Done!"

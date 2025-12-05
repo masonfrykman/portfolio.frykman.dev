@@ -11,14 +11,21 @@ export class Project {
         this.href = href;
     }
 
-    public static fromJSON(jsonDict: Map<string, string>): Project {
-        if(!jsonDict.has("name")) {
+    public static fromJSON(jsonDict: any): Project {
+        if(jsonDict.name == undefined) {
             // TODO: error!
         }
 
-        return new Project(jsonDict.get("name")!, jsonDict.get("date") ?? null, jsonDict.get("blurb") ?? null, jsonDict.get("href") ?? null);
+        return new Project(jsonDict.name!, jsonDict.date ?? null, jsonDict.blurb ?? null, jsonDict.href ?? null);
     }
 
+
+    // ------
+    // <NAME>
+    // <DATE>
+    //
+    // <BLURB>
+    // ------
     public makeInfoTile(): HTMLDivElement {
         // Make the root box
         var rootBox = document.createElement("div");
@@ -29,19 +36,19 @@ export class Project {
         nameElem.innerText = this.name;
         nameElem.classList.add("name");
         rootBox.appendChild(nameElem);
+
+        var dateElem = document.createElement("span");
+        if(this.date != null) {
+            dateElem.innerText = this.date;
+            dateElem.classList.add("date");
+            rootBox.appendChild(dateElem);
+        }
         
         var desc = document.createElement("p");
         if(this.blurb != null) {
             desc.innerText = this.blurb;
             desc.classList.add("desc");
             rootBox.appendChild(desc);
-        }
-        
-        var dateElem = document.createElement("span");
-        if(this.date != null) {
-            dateElem.innerText = this.date;
-            dateElem.classList.add("date");
-            rootBox.appendChild(dateElem);
         }
         
         if(this.href != null && this.href != "") {
