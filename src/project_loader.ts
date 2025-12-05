@@ -1,11 +1,19 @@
-import { catastrophicError } from "./error";
+import { catastrophicError, nonfatalError } from "./error";
 import { Project } from "./project";
 
 async function downloadProjectInfo() {
-    let url = "/projects_info.json";
-    var req = await fetch(url);
+    var req;
+    try {
+        req = await fetch("/projects_info.json");
+    } catch(e) {
+        nonfatalError("Couldn't load the project data from the server. (1)");
+        return;
+    }
+
+    if(req == null) return;
+
     if(!req.ok) {
-        catastrophicError("Failed to load project info");
+        nonfatalError("Couldn't load the project data from the server. (2)");
         return;
     }
 
