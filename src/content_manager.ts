@@ -3,6 +3,7 @@ import { ict_handle_projects } from "./project_loader";
 
 var presenting: string;
 
+// Tries to put the content for an ict page in the content hook.
 export function putContent(forPage: string) {
     if(presenting == forPage || forPage == '') return
 
@@ -24,6 +25,7 @@ export function putContent(forPage: string) {
     presenting = forPage;
 }
 
+// Shows an error in the content hook.
 export function putError(errDesc: string) {
     presenting = 'error';
     ict_handle_nonFatalError(errDesc);

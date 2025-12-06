@@ -1,6 +1,7 @@
 import { catastrophicError, nonfatalError } from "./error";
 import { getFromServer } from "./server_comms";
 
+// Requests the HTML file for an ict page from the server and displays it in the content hook.
 async function ict_loadAndPlace(name: string) {
     if(document.getElementById("content-hook") == null) {
         catastrophicError("Failed to display content for '" + name + "', missing content hook.");

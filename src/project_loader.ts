@@ -1,6 +1,7 @@
 import { catastrophicError, nonfatalError } from "./error";
 import { Project } from "./project";
 
+// Gets the project sumamries from the server and parses them.
 async function downloadProjectInfo() {
     var req;
     try {
@@ -19,7 +20,8 @@ async function downloadProjectInfo() {
     return JSON.parse(await req.text());
 }
 
-async function populateProjects() {
+// Constructs the /projects page in the content hook.
+async function populateProjects(): Promise<void> {
     var json;
     try {
         json = await downloadProjectInfo();

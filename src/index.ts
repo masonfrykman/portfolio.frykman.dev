@@ -5,9 +5,11 @@ addEventListener("popstate", (stateevent) => {
 });
 
 window.onload = () => {
+    // Try to load an ict page from the page url.
     let page = location.pathname.substring(1)
     putContent(page);
 
+    // onclick listeners for the items in the sidebar.
     if(document.getElementById("sidebar-projects") != null) {
         document.getElementById("sidebar-projects")!.addEventListener("click", function() { spawnPageContent('projects') })
     }

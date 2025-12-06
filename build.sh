@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# build.sh: Builds the webroot for serving by the webserver and for quick transport.
+
 echo "Clearing build & dist directories"
 rm -rf build/
 rm -rf dist/
