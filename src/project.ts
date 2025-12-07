@@ -1,4 +1,4 @@
-export class Project {
+export class ProjectSummaryTile {
     private name: string; // required
     private date: string | null;
     private blurb: string | null;
@@ -11,10 +11,10 @@ export class Project {
         this.href = href;
     }
 
-    public static fromJSON(jsonDict: any): Project | null {
+    public static fromJSON(jsonDict: any): ProjectSummaryTile | null {
         if(jsonDict.name == undefined) return null;
 
-        return new Project(jsonDict.name!, jsonDict.date ?? null, jsonDict.blurb ?? null, jsonDict.href ?? null);
+        return new ProjectSummaryTile(jsonDict.name!, jsonDict.date ?? null, jsonDict.blurb ?? null, jsonDict.href ?? null);
     }
 
 
