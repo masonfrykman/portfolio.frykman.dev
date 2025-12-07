@@ -1,5 +1,5 @@
 import { catastrophicError, nonfatalError } from "./error";
-import { ProjectSummaryTile } from "./project";
+import { ProjectSummaryTile } from "./project_summary_tile";
 
 // Gets the project sumamries from the server and parses them.
 async function downloadProjectInfo() {

@@ -1,5 +1,5 @@
 import { ict_handle_contact, ict_handle_about, ict_handle_notfound, ict_handle_nonFatalError } from "./content_handlers";
-import { ict_handle_projects } from "./project_loader";
+import { ict_handle_projects } from "./project_summaries_loader";
 
 var presenting: string;
 
