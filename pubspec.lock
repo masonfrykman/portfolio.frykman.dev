@@ -21,9 +21,9 @@ packages:
     dependency: "direct main"
     description:
       name: rbws
-      sha256: "2a8ec93fc675b1f38efdc389d4acbec526a60371d065620639d22d921b6e6321"
+      sha256: "0eb03d931950cef96d232a9bff3ae82e49c3fd190b2f52ba913e618b20a410d2"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
 sdks:
   dart: ">=3.9.4 <4.0.0"
