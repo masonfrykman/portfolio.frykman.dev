@@ -56,6 +56,13 @@ export class ProjectSummaryTile {
             rootBox.classList.add("show-clickable");
         }
 
+        if(this.href != null && this.href.startsWith("http")) {
+            let extWarning = document.createElement("span");
+            extWarning.classList.add("ext-warning");
+            extWarning.innerText = "Links to external site '" + this.href + "'.";
+            rootBox.appendChild(extWarning);
+        }
+
         return rootBox;
     }
 }

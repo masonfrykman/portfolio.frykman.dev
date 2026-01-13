@@ -166,3 +166,9 @@ a {
 .subheading {
   margin-bottom: 10pt;
 }
+
+.ext-warning {
+  margin-top: 9pt;
+  font-size: 9pt;
+  color: gray;
+}

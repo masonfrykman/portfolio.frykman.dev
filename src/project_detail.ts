@@ -6,7 +6,14 @@ export default class ProjectDetails {
     private longDescription: string | null;
     private externalLinks: Map<string, string> | null; // may be empty
 
-    public constructor(name: string, subtitle: string, date: string | null, images: Array<string> | null, longDescription: string, externalLinks: Map<string, string> | null) {
+    public constructor(
+        name: string, 
+        subtitle: string, 
+        date: string | null, 
+        images: Array<string> | null, 
+        longDescription: string, 
+        externalLinks: Map<string, string> | null
+    ) {
         this.name = name;
         this.subtitle = subtitle;
         this.date = date;
@@ -20,14 +27,14 @@ export default class ProjectDetails {
             return null;
         }
 
-        var tl: Array<string> | null;
-        if(jsonObject.images == null) {
-            tl = null;
-        } else {
-            tl = jsonObject.images;
-        }
-        console.log(jsonObject.images);
-        return new ProjectDetails(jsonObject.name, jsonObject.subtitle ?? null, jsonObject.date ?? null, tl, jsonObject.longDescription ?? null, jsonObject.externalLinks != undefined ? new Map(Object.entries(jsonObject.externalLinks)) : null);
+        return new ProjectDetails(
+            jsonObject.name, 
+            jsonObject.subtitle ?? null, 
+            jsonObject.date ?? null, 
+            jsonObject.images != undefined ? new Array(jsonObject.images) : null, 
+            jsonObject.longDescription ?? null, 
+            jsonObject.externalLinks != undefined ? new Map(Object.entries(jsonObject.externalLinks)) : null
+        );
     }
 
     // <NAME>
