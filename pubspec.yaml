@@ -6,7 +6,8 @@ environment:
   sdk: ^3.9.4
 
 dependencies:
-  rbws: ^2.0.0
+  rbws: ^3.0.0-pr2
+  mime: ^2.0.0
 
 dev_dependencies:
   lints: ^6.0.0

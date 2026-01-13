@@ -17,10 +17,11 @@ void main(List<String> args) {
     final insecureInstance = HTTPServerInstance(
       InternetAddress.anyIPv4,
       80,
-      generalServeRoot: "dist/",
+      storage: RootedNoneStore("dist/"),
     );
 
     insecureInstance.routeNotFound = (r) {
+      print("not found!");
       return RBWSResponse.dataFromString(
         200,
         mainPageContent,
@@ -48,8 +49,8 @@ void main(List<String> args) {
       final secureInstance = HTTPServerInstance(
         InternetAddress.anyIPv4,
         443,
-        generalServeRoot: "dist/",
         securityContext: securityContext,
+        storage: RootedNoneStore("dist/"),
       );
 
       secureInstance.routeNotFound = insecureInstance.routeNotFound;
