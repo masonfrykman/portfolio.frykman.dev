@@ -4,14 +4,14 @@
         "id": "loofa-trees",
         "date": "October 2025",
         "blurb": "3D stochastic fractal generator using three.js. For DES 255 'Integrative Design Studio I'.",
-        "href": "https://loofa.frykman.dev"
+        "href": "/projects/loofa-trees"
     },
     {
         "name": "(this)",
         "id": "portfolio",
         "date": "October 2025",
         "blurb": "portfolio.frykman.dev, or, the website you are on right now. My personal portfolio website.",
-        "href": "https://github.com/masonfrykman/portfolio.frykman.dev"
+        "href": "/projects/portfolio"
     },
     {
         "name": "package:rbws",

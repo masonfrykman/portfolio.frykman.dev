@@ -1,8 +1,9 @@
 {
     "name": "loofa trees",
     "subtitle": "3D stochastic fractal generator using three.js.",
+    "date": "October 2025",
     "images": ["loofa.png"],
-    "longDescription": "For DES 255 'Integrative Design Studio I'.\nUtilizies three.js and a 3D scanned loofa to randomly generate a fractal recursively in 3D space which is then capped with said loofa.",
+    "longDescription": "For DES 255 'Integrative Design Studio I'.\nUtilizies three.js and a 3D scanned loofa to randomly generate a fractal recursively in 3D space which is then capped with said loofa.\nProvides buttons to regenerate the tree in place, export the entire tree as a GLB file, and to take a screenshot.",
     "externalLinks": {
         "Official Website (runs poorly on mobile, use a semi-modern desktop)": "https://loofa.frykman.dev",
         "GitHub": "https://github.com/masonfrykman/loofa-trees"

@@ -158,3 +158,11 @@ body {
 a {
   color: white;
 }
+
+.subheading p {
+  margin-bottom: 2pt;
+}
+
+.subheading {
+  margin-bottom: 10pt;
+}
