@@ -18,7 +18,7 @@ export default class ProjectDetails {
             return null;
         }
 
-        return new ProjectDetails(jsonObject.name, jsonObject.subtitle ?? null, jsonObject.images ?? [], jsonObject.longDescription ?? null, new Map(Object.entries(jsonObject.externalLinks)) ?? {});
+        return new ProjectDetails(jsonObject.name, jsonObject.subtitle ?? null, new Array(jsonObject.images) ?? [], jsonObject.longDescription ?? null, new Map(Object.entries(jsonObject.externalLinks)) ?? {});
     }
 
     // <NAME>
@@ -44,7 +44,8 @@ export default class ProjectDetails {
 
         for(var imgString of this.images) {
             var img = document.createElement("img");
-            img.src = imgString;
+            img.src = "/img/" + imgString;
+            img.classList.add("project-image");
             rootDiv.appendChild(img);
         }
 

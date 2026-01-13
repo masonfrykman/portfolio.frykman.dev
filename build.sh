@@ -58,6 +58,9 @@ done
 
 # Project descriptions
 cp -r projects ../dist/projects
+
+# Images
+cp -r img ../dist/img
 cd ..
 
 cp src/projects_info.json dist/projects_info.json
