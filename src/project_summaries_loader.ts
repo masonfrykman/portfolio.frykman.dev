@@ -1,5 +1,5 @@
 import { catastrophicError, nonfatalError } from "./error";
-import { Project } from "./project";
+import { ProjectSummaryTile } from "./project_summary_tile";
 
 // Gets the project sumamries from the server and parses them.
 async function downloadProjectInfo() {
@@ -32,7 +32,7 @@ async function populateProjects(): Promise<void> {
 
     var projects = [];
     for(const dictionary of json) {
-        var proj = Project.fromJSON(dictionary);
+        var proj = ProjectSummaryTile.fromJSON(dictionary);
         if(proj == null) continue;
         projects.push(proj);
     }

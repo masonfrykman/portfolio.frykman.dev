@@ -74,6 +74,10 @@ body {
     align-items: center;
     justify-content: center;
   }
+
+  img.project-image {
+    width: 447px;
+  }
 }
 
 /* at this width, optimise for touch */
@@ -92,6 +96,10 @@ body {
     
     .sidebar-list li {
       margin-top: 4pt;
+    }
+
+    img.project-image {
+      width: 100%;
     }
 }
 
@@ -145,4 +153,22 @@ body {
 
 .proj-item * {
   font-size: 12pt;
+}
+
+a {
+  color: white;
+}
+
+.subheading p {
+  margin-bottom: 2pt;
+}
+
+.subheading {
+  margin-bottom: 10pt;
+}
+
+.ext-warning {
+  margin-top: 9pt;
+  font-size: 9pt;
+  color: gray;
 }

@@ -55,6 +55,12 @@ for filename in *.css; do
         exit 1
     fi
 done
+
+# Project descriptions
+cp -r projects ../dist/projects
+
+# Images
+cp -r img ../dist/img
 cd ..
 
 cp src/projects_info.json dist/projects_info.json
