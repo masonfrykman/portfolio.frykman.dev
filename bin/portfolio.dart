@@ -4,6 +4,12 @@ import 'package:rbws/rbws.dart';
 
 void main(List<String> args) {
   try {
+    // Shared storage obj
+    final store = RootedAutoreleasingStore(
+      "dist/",
+      defaultStorageDuration: Duration(days: 1),
+    );
+
     // Load index
     var index = File("dist/index.html");
     if (!index.existsSync()) {
@@ -17,7 +23,7 @@ void main(List<String> args) {
     final insecureInstance = HTTPServerInstance(
       InternetAddress.anyIPv4,
       80,
-      storage: RootedNoneStore("dist/"),
+      storage: store,
     );
 
     insecureInstance.routeNotFound = (r) {
@@ -49,7 +55,7 @@ void main(List<String> args) {
         InternetAddress.anyIPv4,
         443,
         securityContext: securityContext,
-        storage: RootedNoneStore("dist/"),
+        storage: store,
       );
 
       secureInstance.routeNotFound = insecureInstance.routeNotFound;
