@@ -21,7 +21,6 @@ void main(List<String> args) {
     );
 
     insecureInstance.routeNotFound = (r) {
-      print("not found!");
       return RBWSResponse.dataFromString(
         200,
         mainPageContent,

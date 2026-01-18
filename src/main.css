@@ -2,8 +2,32 @@
 
 body {
   font-family: 'Work Sans', 'Helvetica', 'Futura', 'Arial', sans-serif;
-  display: flex;
   font-size: 16pt;
+}
+
+#r-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#header {
+  display: flex;
+  flex-direction: row;
+  float: right;
+  position: absolute;
+  right: 10pt;
+
+  color: gray;
+  font-size: 10pt;
+}
+
+#header * {
+  margin-left: 5pt;
+}
+
+#header a {
+  color: gray;
 }
 
 .name {
