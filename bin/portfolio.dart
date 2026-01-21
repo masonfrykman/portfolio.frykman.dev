@@ -2,6 +2,10 @@ import 'dart:io';
 
 import 'package:rbws/rbws.dart';
 
+import 'hit_manager.dart';
+
+final HitManager hm = HitManager();
+
 void main(List<String> args) {
   try {
     // Shared storage obj
@@ -27,7 +31,8 @@ void main(List<String> args) {
     );
 
     insecureInstance.routeNotFound = (r) {
-      return RBWSResponse.dataFromString(
+      final hit = hm.hit(r.headers["Cookie"]);
+      final res = RBWSResponse.dataFromString(
         200,
         mainPageContent,
         toRequest: r,
@@ -37,6 +42,30 @@ void main(List<String> args) {
           "Age": "0",
         },
       );
+      if (hit != null) {
+        res.headers["Set-Cookie"] =
+            "sid=$hit; SameSite=strict; Max-Age=${Duration(hours: 2).inSeconds}";
+      }
+      return res;
+    };
+
+    insecureInstance.staticRoutes = {
+      (.get, "/hits"): (request) {
+        var content = "<h1>portfolio.frykman.dev hits</h1>\n";
+        if (request.headers["Cookie"] != null) {
+          content += "<b>Your Cookie: ${request.headers["Cookie"]}</b><br><ul>";
+        }
+        for (var session in hm.hits.entries) {
+          content += "<li>${session.key}, ${session.value}</li>\n";
+        }
+        content += "</ul>";
+
+        return RBWSResponse.dataFromString(
+          HTTPStatusCode.ok,
+          content,
+          headers: {"Content-Type": "text/html"},
+        );
+      },
     };
 
     insecureInstance.start();
