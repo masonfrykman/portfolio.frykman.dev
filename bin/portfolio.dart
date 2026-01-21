@@ -88,6 +88,7 @@ void main(List<String> args) {
       );
 
       secureInstance.routeNotFound = insecureInstance.routeNotFound;
+      secureInstance.staticRoutes = insecureInstance.staticRoutes;
 
       secureInstance.start();
 
