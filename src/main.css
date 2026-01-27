@@ -125,6 +125,11 @@ body {
     img.project-image {
       width: 100%;
     }
+
+    #r-wrap {
+      flex-direction: row;
+      justify-content: flex-start;
+    }
 }
 
 @media (prefers-color-scheme: light) {
