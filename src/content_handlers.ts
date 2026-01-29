@@ -11,7 +11,7 @@ async function ict_loadAndPlace(name: string) {
     let reqName = "/ict_" + name + ".html";
     let resp: string | null = await getFromServer(reqName);
     if(resp == null) {
-        nonfatalError("Failed to get content for '" + name + "' from server.");
+        nonfatalError("Failed to get content for '" + name + "' from the server.");
         return;
     }
 

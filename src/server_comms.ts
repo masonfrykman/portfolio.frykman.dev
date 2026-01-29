@@ -3,10 +3,11 @@ export async function getFromServer(path: string): Promise<string | null> {
     try {
         var req = await fetch(path);
     } catch(e) {
+        console.error(e);
         return null;
     }
 
     if(!req.ok) return null;
 
-    return await req.text()
+    return await req.text();
 }
