@@ -137,6 +137,10 @@ body {
         background-color: whitesmoke;
         color: black;
     }
+
+    a {
+      color: black;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -148,6 +152,10 @@ body {
     .proj-item {
       border-color: white;
       border-style: solid;
+    }
+
+    a {
+      color: white;
     }
 }
 
@@ -182,10 +190,6 @@ body {
 
 .proj-item * {
   font-size: 12pt;
-}
-
-a {
-  color: white;
 }
 
 .subheading p {
