@@ -51,7 +51,9 @@ void main(List<String> args) {
 
     insecureInstance.staticRoutes = {
       (.get, "/hits"): (request) {
-        var content = "<h1>portfolio.frykman.dev hits</h1>\n";
+        var content =
+            "<!DOCTYPE html><html><head><title>Hits of portfolio.frykman.dev</title></head><body><h1>portfolio.frykman.dev hits</h1>\n";
+
         if (request.headers["Cookie"] != null) {
           content += "<b>Your Cookie: ${request.headers["Cookie"]}</b><br><ul>";
         }
@@ -59,6 +61,8 @@ void main(List<String> args) {
           content += "<li>${session.key}, ${session.value}</li>\n";
         }
         content += "</ul>";
+
+        content += "</body></html>";
 
         return RBWSResponse.dataFromString(
           HTTPStatusCode.ok,
