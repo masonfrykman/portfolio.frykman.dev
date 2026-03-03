@@ -44,30 +44,45 @@ void main(List<String> args) {
       );
       if (hit != null) {
         res.headers["Set-Cookie"] =
-            "sid=$hit; SameSite=strict; Max-Age=${Duration(hours: 2).inSeconds}";
+            "sid=$hit;SameSite=strict;Max-Age=1576800000";
       }
       return res;
     };
 
     insecureInstance.staticRoutes = {
       (.get, "/hits"): (request) {
+        final hit = hm.hit(request.headers["Cookie"], path: "/hits");
+
         var content =
             "<!DOCTYPE html><html><head><title>Hits of portfolio.frykman.dev</title></head><body><h1>portfolio.frykman.dev hits</h1>\n";
+
+        content += "<p>${DateTime.now().toIso8601String()}</p>";
 
         if (request.headers["Cookie"] != null) {
           content += "<b>Your Cookie: ${request.headers["Cookie"]}</b><br><ul>";
         }
         for (var session in hm.hits.entries) {
-          content += "<li>${session.key}, ${session.value}</li>\n";
+          content += "<li>${session.key}:</li><ul>";
+          for (var page in session.value.entries) {
+            content += "<li>${page.key}: ${page.value}</li>\n";
+          }
         }
-        content += "</ul>";
+        content += "</ul></ul>";
 
         content += "</body></html>";
 
         return RBWSResponse.dataFromString(
           HTTPStatusCode.ok,
           content,
-          headers: {"Content-Type": "text/html"},
+          headers: {"Content-Type": "text/html"}
+            ..addAll(
+              hit != null
+                  ? {
+                      "Set-Cookie":
+                          "sid=$hit;SameSite=strict;Max-Age=1576800000",
+                    }
+                  : {},
+            ),
         );
       },
     };
