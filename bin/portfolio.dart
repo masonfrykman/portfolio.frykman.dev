@@ -31,7 +31,7 @@ void main(List<String> args) {
     );
 
     insecureInstance.routeNotFound = (r) {
-      final hit = hm.hit(r.headers["Cookie"]);
+      final hit = hm.hit(r.headers["Cookie"], path: r.path);
       final res = RBWSResponse.dataFromString(
         200,
         mainPageContent,
