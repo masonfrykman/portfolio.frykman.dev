@@ -1,0 +1,25 @@
+{
+  "name": "portfolio.frykman.dev",
+  "version": "2026-01-29",
+  "description": "my portfolio site",
+  "homepage": "https://github.com/masonfrykman/portfolio.frykman.dev#readme",
+  "bugs": {
+    "url": "https://github.com/masonfrykman/portfolio.frykman.dev/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masonfrykman/portfolio.frykman.dev.git"
+  },
+  "author": "Mason Frykman",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "./build.sh",
+    "webserver": "./build.sh && dart run bin/portfolio.dart"
+  },
+  "devDependencies": {
+    "minify": "^15.0.1",
+    "rollup": "^4.59.0",
+    "typescript": "^5.9.3"
+  }
+}
