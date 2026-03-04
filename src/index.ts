@@ -1,4 +1,4 @@
-import { putContent, spawnPageContent } from "./content_manager";
+import { putContent, spawnPageContent } from "./module/content_manager";
 
 addEventListener("popstate", (stateevent) => {
     putContent(stateevent.state);
