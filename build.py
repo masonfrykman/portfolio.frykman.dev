@@ -62,11 +62,16 @@ if(rollup.returncode != 0):
     raise SystemExit(2)
 
 print("\t> minify")
-min_ts = subprocess.run(["npx", "minify", "build/bundle.js"], text=True)
+min_ts = subprocess.run(["npx", "minify", "build/bundle.js"], text=True, capture_output=True)
 if(min_ts.stdout.startswith("Error:")):
     print("\t\tERROR: minify failed to minify build/bundle.js.")
     print(f"\t\t\tStdout: ${min_ts.stdout}")
     raise SystemExit(2)
+
+bundle_min = open("dist/bundle.min.js", "w")
+bundle_min.write(min_ts.stdout)
+bundle_min.flush()
+bundle_min.close()
 
 print("SUCCESS: Compiling & bundling typescript")
 
@@ -78,8 +83,8 @@ for copy_defs in bf_copy:
     filename = rootdir + copy_defs[1]
 
     # check it exists.
-    if(os.path.exists(copy_defs[1]) == False):
-        print(f"\tWARN: Not copying {copy_defs[1]} as it does not exist.")
+    if(os.path.exists(filename) == False):
+        print(f"\tWARN: Not copying {filename} as it does not exist.")
         continue
 
     # copy it
@@ -90,14 +95,48 @@ for copy_defs in bf_copy:
     else:
         print(f"\tWARN: Invalid type '{copy_defs[0]}' for '{copy_defs[1]}'.")
 
+def minifytree(dir, outdir):
+    if(os.path.isdir(dir) == False):
+        return
+    if(dir.endswith("/") == False):
+        dir += "/"
+
+    objlist = os.listdir(dir)
+    print(objlist)
+    for obj in objlist:
+        if(obj == ".DS_Store" or obj.startswith(".noinclude.")): continue
+        if(os.path.isdir(dir + obj)):
+            os.mkdir(outdir + obj + "/")
+            minifytree(dir, outdir + obj + "/")
+        elif(os.path.isfile(dir + obj)):
+            minify = subprocess.run(["npx", "minify", dir + obj], text=True, capture_output=True)
+            if(minify.stdout.startswith("Error:") == False):
+                with open(outdir + obj, "w") as out:
+                    out.write(minify.stdout)
+                    out.flush()
+
 # minify
 for min_defs in bf_minify:
-    filename = rootdir + copy_defs[1]
+    filename = rootdir + min_defs[1]
 
     # check it exists
-    if(os.path.exists(copy_defs[1]) == False):
-        print(f"\tWARN: Not minifying {copy_defs[1]} as it does not exist.")
+    if(os.path.exists(filename) == False):
+        print(f"\tWARN: Not minifying {min_defs[1]} as it does not exist.")
         continue
 
     # run thru minify
-    # TODO: finish this function for file and directory types.
+    if(min_defs[0] == "file"):
+        minify = subprocess.run(["npx", "minify", filename], text=True, capture_output=True)
+        if(minify.stdout.startswith("Error:")):
+            print(f"\tWARN: Failed to minify file '{min_defs[1]}'.")
+            continue
+
+        with open(outdir + min_defs[1], "w") as nf:
+            nf.write(minify.stdout)
+            nf.flush()
+    elif(min_defs[0] == "directory"):
+        dirname = min_defs[1]
+        if(dirname.endswith("/") == False):
+            dirname += "/"
+        os.mkdir(outdir + dirname)
+        minifytree(rootdir + dirname, outdir + dirname)
