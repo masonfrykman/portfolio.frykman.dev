@@ -14,8 +14,8 @@
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
-    "build": "./build.sh",
-    "webserver": "./build.sh && dart run bin/portfolio.dart"
+    "build": "python3 build.py",
+    "webserver": "python3 build.py && dart run bin/portfolio.dart"
   },
   "devDependencies": {
     "minify": "^15.0.1",
