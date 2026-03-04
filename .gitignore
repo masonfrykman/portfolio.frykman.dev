@@ -3,7 +3,7 @@
 
 # No build files
 dist/
-build.tar.gz
 build/
+webroot.tar.gz
 
 node_modules/

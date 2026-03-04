@@ -1,7 +1,6 @@
 import subprocess
-import sys
 import os
-from shutil import rmtree, copytree, copyfile
+from shutil import rmtree, copytree, copyfile, make_archive
 
 if(os.path.exists("build.conf") == False):
     print("Error: build.conf is missing.")
@@ -13,6 +12,7 @@ bf_minify = []
 bf_copy = []
 rootdir = "src/"
 outdir = "dist/"
+archive = None
 
 with open("build.conf", "r") as buildfile:
     for line in buildfile.readlines():
@@ -35,6 +35,8 @@ with open("build.conf", "r") as buildfile:
             rootdir = line_args[2]
         elif(line_args[0] == "output"):
             outdir = line_args[2]
+        elif(line_args[0] == "archive"):
+            archive = (line_args[1], line_args[2])
         else:
             print(f"WARN: Invalid line definition '{line}'.")
 
@@ -102,7 +104,6 @@ def minifytree(dir, outdir):
         dir += "/"
 
     objlist = os.listdir(dir)
-    print(objlist)
     for obj in objlist:
         if(obj == ".DS_Store" or obj.startswith(".noinclude.")): continue
         if(os.path.isdir(dir + obj)):
@@ -140,3 +141,7 @@ for min_defs in bf_minify:
             dirname += "/"
         os.mkdir(outdir + dirname)
         minifytree(rootdir + dirname, outdir + dirname)
+
+# compress
+if(archive != None):
+    make_archive(archive[1], "gztar", archive[0])
