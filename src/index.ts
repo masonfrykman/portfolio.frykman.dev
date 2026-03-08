@@ -1,3 +1,4 @@
+import { drawBackground } from "./module/background";
 import { putContent, spawnPageContent } from "./module/content_manager";
 
 addEventListener("popstate", (stateevent) => {
@@ -21,4 +22,6 @@ window.onload = () => {
     if(document.getElementById("sidebar-contact") != null) {
         document.getElementById("sidebar-contact")!.addEventListener("click", function() { spawnPageContent('contact') })
     }
+
+    drawBackground()
 }
