@@ -1,5 +1,5 @@
-function makeTree(iter: number, ceil: number, n: number, degreeRange: [number, number], lineLength: number, origin: [number, number], surface: CanvasRenderingContext2D) {
-    console.log("makeTree -> iter: " + iter + " ceil: " + ceil + " n: " + n + " range: " + degreeRange + " line: " + lineLength + " origin: " + origin)
+function makeTree(iter: number, ceil: number, n: number, degreeRange: [number, number], lineLength: number, origin: [number, number], surface: SVGSVGElement) {
+    //console.log("makeTree -> iter: " + iter + " ceil: " + ceil + " n: " + n + " range: " + degreeRange + " line: " + lineLength + " origin: " + origin)
     
     if(iter == ceil || n < 1) {
         return
@@ -29,17 +29,26 @@ function makeTree(iter: number, ceil: number, n: number, degreeRange: [number, n
         let b = lineLength * Math.cos(theta) // this will be the x extension
 
         // Draw a line from the current origin to the new origin.
-        surface.moveTo(origin[0], origin[1])
-        surface.strokeStyle = "rgb(" + Math.random() * 255 + "," + Math.random() * 255 + "," + Math.random() * 255 + ")"
-        surface.lineTo(origin[0] + b, origin[1] + a)
-        surface.stroke()
+        let d = "M" + origin[0] + " " + origin[1] + " L" + (origin[0] + a) + " " + (origin[1] + b)
+
+        let line = document.createElementNS("http://www.w3.org/2000/svg", "path")
+        line.setAttribute("d", d)
+        line.setAttribute("stroke", "rgb(" + Math.random() * 255 + "," + Math.random() * 255 + "," + Math.random() * 255 + ")")
+        line.setAttribute("stroke-width", "1")
+
+        surface.appendChild(line)
 
         makeTree(iter + 1, ceil, n, degreeRange, lineLength, [origin[0] + b, origin[1] + a], surface)
     }
 }
 
 export function drawBackground() {
-    let surface = (document.getElementById("background")! as HTMLCanvasElement).getContext("2d")!
+    if(window.localStorage.getItem("no-background-v1") == "true") {
+        return
+    }
 
-    makeTree(0, 5, 2, [270, 90], 50, [0, 0], surface)
+    let surface = document.getElementById("background") as unknown as SVGSVGElement
+
+    makeTree(0, 6, 3, [0, 180], window.innerWidth / 3, [0, 0], surface)
+    makeTree(0, 6, 3, [0, 180], window.innerWidth / 3, [window.innerWidth / 2, 0], surface)
 }
