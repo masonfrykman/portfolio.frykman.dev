@@ -23,5 +23,24 @@ window.onload = () => {
         document.getElementById("sidebar-contact")!.addEventListener("click", function() { spawnPageContent('contact') })
     }
 
+    document.getElementById("disable-bg")!.addEventListener("click", (ev) => {
+        if(window.localStorage.getItem("no-background-v1") == "true") {
+            // Switch to DRAW BACKGROUND STATE
+            document.getElementById("disable-bg")!.innerText = "disable background"
+            window.localStorage.setItem("no-background-v1", "false")
+            drawBackground()
+        } else {
+            // Switch to NO BACKGROUND STATE
+            document.getElementById("disable-bg")!.innerText = "enable background"
+            window.localStorage.setItem("no-background-v1", "true")
+            document.getElementById("background")!.innerHTML = ""
+        }
+    })
+
+    if(window.localStorage.getItem("no-background-v1") == "true") {
+        document.getElementById("disable-bg")!.innerText = "enable background"
+    }
+
+    // draw the background
     drawBackground()
 }
