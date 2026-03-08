@@ -1,6 +1,6 @@
 {
   "name": "portfolio.frykman.dev",
-  "version": "2026-01-29",
+  "version": "2026-03-08",
   "description": "my portfolio site",
   "homepage": "https://github.com/masonfrykman/portfolio.frykman.dev#readme",
   "bugs": {
@@ -15,10 +15,11 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "python3 build.py",
+    "clean": "rm -rf build dist webroot.tar.gz",
     "webserver": "python3 build.py && dart run bin/portfolio.dart"
   },
   "devDependencies": {
-    "minify": "^15.0.1",
+    "minify": "^15.2.0",
     "rollup": "^4.59.0",
     "typescript": "^5.9.3"
   }
