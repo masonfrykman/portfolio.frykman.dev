@@ -12,14 +12,31 @@ class HitManager {
   int hitsTotal = 0;
 
   HitManager() {
-    _dailyRefresh();
+    _dailyRefresh(); // call immediately to schedule
   }
 
   void _dailyRefresh() {
     hitsYesterday = hitsToday;
     hitsToday = 0;
 
-    // TODO: use Future.delayed to schedule the next refresh at midnight.
+    // use Future.delayed to schedule the next refresh at midnight UTC.
+    DateTime oneDay = DateTime.now()
+      ..add(Duration(days: 1))
+      ..toUtc();
+
+    DateTime midnight = DateTime.utc(
+      oneDay.year,
+      oneDay.month,
+      oneDay.day,
+      0,
+      0,
+      0,
+      0,
+      0,
+    );
+
+    Duration schedule = midnight.difference(DateTime.now().toUtc());
+    Future.delayed(schedule, _dailyRefresh);
   }
 
   String? hit(String? cookieHeader) {
