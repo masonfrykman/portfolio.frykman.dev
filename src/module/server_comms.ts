@@ -1,13 +1,23 @@
 export async function getFromServer(path: string): Promise<string | null> {
-    var req: Response;
+    let req = await requestServer(path)
+    if(req == null || !req.ok) return null;
+    
+    return await req.text();
+}
+
+export async function requestServer(path: string, method: string = "GET", body: string | null = null): Promise<Response | null> {
+    var req = new Request(path, {
+        method: method,
+        body: body
+    });
+    
+    var res: Response;
     try {
-        var req = await fetch(path);
-    } catch(e) {
-        console.error(e);
+        res = await fetch(req)
+    } catch(err) {
+        console.error(err);
         return null;
     }
 
-    if(!req.ok) return null;
-
-    return await req.text();
+    return res;
 }
