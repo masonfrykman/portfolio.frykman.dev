@@ -26,6 +26,10 @@ export async function ict_handle_about() {
     await ict_loadAndPlace('about');
 }
 
+export async function ict_handle_analytics() {
+    await ict_loadAndPlace('analytics');
+}
+
 export async function ict_handle_notfound() {
     await ict_loadAndPlace('nf');
     if(document.getElementById("pnf") != null) {

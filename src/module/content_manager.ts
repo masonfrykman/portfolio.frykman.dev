@@ -1,6 +1,7 @@
 import { ict_handle_contact, ict_handle_about, ict_handle_notfound, ict_handle_nonFatalError } from "./content_handlers";
 import { ict_handle_project_detail } from "./project_detail_loader";
 import { ict_handle_projects } from "./project_summaries_loader";
+import { loadAnalyticsPage } from "./analytics";
 
 var presenting: string;
 
@@ -22,6 +23,9 @@ export function putContent(forPage: string) {
             break;
         case 'projects':
             ict_handle_projects();
+            break;
+        case 'analytics':
+            loadAnalyticsPage();
             break;
         default:
             ict_handle_notfound();
