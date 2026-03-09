@@ -3,8 +3,7 @@ import 'dart:io';
 import 'package:rbws/rbws.dart';
 
 import 'hit_manager.dart';
-
-final HitManager hm = HitManager();
+import 'api/analytics.dart';
 
 void main(List<String> args) {
   try {
@@ -50,22 +49,9 @@ void main(List<String> args) {
     };
 
     insecureInstance.staticRoutes = {
-      (.get, "/hits"): (request) {
-        var content = "<h1>portfolio.frykman.dev hits</h1>\n";
-        if (request.headers["Cookie"] != null) {
-          content += "<b>Your Cookie: ${request.headers["Cookie"]}</b><br><ul>";
-        }
-        for (var session in hm.hits.entries) {
-          content += "<li>${session.key}, ${session.value}</li>\n";
-        }
-        content += "</ul>";
-
-        return RBWSResponse.dataFromString(
-          HTTPStatusCode.ok,
-          content,
-          headers: {"Content-Type": "text/html"},
-        );
-      },
+      (.get, "/hits"): (request) => RBWSResponse(HTTPStatusCode.movedPermanently, toRequest: request, headers: {"Location": "/analytics"}),
+      
+      ...analytics_v1_api // api/analytics.dart
     };
 
     insecureInstance.start();
