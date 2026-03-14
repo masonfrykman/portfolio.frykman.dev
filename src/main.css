@@ -92,6 +92,12 @@ a.has-event-listener {
   border-radius: 10pt;
 }
 
+@media (prefers-color-scheme: dark) {
+  #root {
+    box-shadow: 2pt 2pt 9pt 5pt rgba(0, 0, 0, 0.6)
+  }
+}
+
 @keyframes fadein {
   0% { opacity: 0; }
   100% { opacity: 100%; }
